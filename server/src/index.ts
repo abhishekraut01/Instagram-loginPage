@@ -18,11 +18,11 @@ import AuthRouter from "./routes/auth.routes";
 app.use("/api/v1/auth", AuthRouter);
 
 connectDb()
-.then(() => {
-  app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT} 😎😎😎`);
+  .then(() => {
+    app.listen(PORT, () => {
+      console.log(`Server running on port ${PORT} 😎😎😎`);
+    });
+  })
+  .catch(() => {
+    console.log(`something went wrong while connecting to databse`);
   });
-})
-.catch(()=>{
-  console.log(`something went wrong while connecting to databse`)
-})
