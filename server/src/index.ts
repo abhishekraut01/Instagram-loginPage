@@ -14,8 +14,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 import AuthRouter from "./routes/auth.routes";
+import { errorHandler } from "./middleware/globelerrorhandler";
 
 app.use("/api/v1/auth", AuthRouter);
+
+app.use(errorHandler);
 
 connectDb()
   .then(() => {

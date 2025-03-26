@@ -1,18 +1,21 @@
 import { Request, Response } from "express";
 import { User } from "../model/User";
+import { z } from "zod";
 
-export const loginController = async (req: Request, res: Response) => {
-  const { username, email, phoneNumber, password } = req.body;
+const userSchema = z.object({
+  loginInput: z.string().min(1, "Username is required"),
+  password: z.string().min(1, "Password is required"),
+});
 
+export const loginController = async (
+  req: Request,
+  res: Response,
+  next: (err?: any) => void
+): Promise<void> => {
   try {
-    // Create new user
-    const newUser = new User({
-      username,
-      email,
-      phoneNumber,
-      password,
-    });
+    const validatedData = userSchema.parse(req.body);
 
+    const newUser = new User(validatedData);
     await newUser.save();
 
     res.status(201).json({
@@ -20,23 +23,19 @@ export const loginController = async (req: Request, res: Response) => {
       userId: newUser._id,
     });
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Server error" });
+    next(error);
   }
 };
 
-export const registerController = async (req: Request, res: Response) => {
-  const { username, email, phoneNumber, password } = req.body;
-
+export const registerController = async (
+  req: Request,
+  res: Response,
+  next: (err?: any) => void
+): Promise<void> => {
   try {
-    // Create new user
-    const newUser = new User({
-      username,
-      email,
-      phoneNumber,
-      password,
-    });
+    const validatedData = userSchema.parse(req.body);
 
+    const newUser = new User(validatedData);
     await newUser.save();
 
     res.status(201).json({
@@ -44,7 +43,6 @@ export const registerController = async (req: Request, res: Response) => {
       userId: newUser._id,
     });
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Server error" });
+    next(error);
   }
 };
