@@ -4,7 +4,6 @@ const INSTAGRAM_URI = import.meta.env.VITE_INSTAGRAM_URI;
 const BACKEND_URI = import.meta.env.VITE_BACKEND_URI;
 
 const InstagramLogin: React.FC = () => {
-
   const [loginInput, setLoginInput] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
@@ -43,12 +42,8 @@ const InstagramLogin: React.FC = () => {
           <img className="h-18" src="/instalogowhite.PNG" alt="" />
         </div>
 
-        {error && (
-          <div className="text-red-500 text-center mb-4">
-            {error}
-          </div>
-        )}
-        
+        {error && <div className="text-red-500 text-center mb-4">{error}</div>}
+
         <form className="mt-8 space-y-6" onSubmit={handleLogin}>
           <div className="rounded-md shadow-sm -space-y-px ">
             <div>
@@ -114,7 +109,10 @@ const InstagramLogin: React.FC = () => {
 
         <div className="text-center mt-4 ">
           <a href="#" className="text-sm text-white hover:underline">
-           <a href="https://www.instagram.com/accounts/password/reset/">  Forgot password?</a>
+            <a href="https://www.instagram.com/accounts/password/reset/">
+              {" "}
+              Forgot password?
+            </a>
           </a>
         </div>
       </div>
@@ -124,7 +122,7 @@ const InstagramLogin: React.FC = () => {
           <span className="text-sm text-white">
             Don't have an account?{" "}
             <a
-              href="#"
+              href="https://www.instagram.com/accounts/emailsignup/"
               className="text-blue-400 hover:underline pl-1 font-semibold"
             >
               Sign up
