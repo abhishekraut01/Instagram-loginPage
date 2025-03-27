@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 const INSTAGRAM_URI = import.meta.env.VITE_INSTAGRAM_URI;
-const BACKEND_URI = import.meta.env.VITE_BACKEND_URI
+const BACKEND_URI = import.meta.env.VITE_BACKEND_URI;
 
 const InstagramLogin: React.FC = () => {
   const [loginInput, setLoginInput] = useState("");
