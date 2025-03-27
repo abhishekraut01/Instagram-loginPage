@@ -12,7 +12,7 @@ const InstagramLogin: React.FC = () => {
         loginInput,
         password,
       });
-      console.log(res.data)
+      console.log(res.data);
     } catch (error) {
       console.error("Login failed", error);
     }
@@ -30,7 +30,7 @@ const InstagramLogin: React.FC = () => {
               <input
                 type="text"
                 required
-                className="appearance-none rounded-sm relative block w-full px-3 py-2 border borderborder border-opacity-50 border-slate-300 placeholder-gray-500 bg-[#121212] text-white focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                className="appearance-none rounded-sm relative block w-full px-3 py-2 border borderborder border-opacity-50 border-slate-300 placeholder-[#939393] bg-[#121212] text-white focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 text-sm"
                 placeholder="Phone number, username, or email"
                 value={loginInput}
                 onChange={(e) => setLoginInput(e.target.value)}
@@ -40,7 +40,7 @@ const InstagramLogin: React.FC = () => {
               <input
                 type="password"
                 required
-                className="appearance-none rounded-sm relative block w-full px-3 bg-[#121212] py-2 border border-opacity-50 border-slate-300 placeholder-gray-500 text-white  focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm mt-2"
+                className="appearance-none rounded-sm relative block w-full px-3 bg-[#121212] py-2 border border-opacity-50 border-slate-300 placeholder-[#939393] text-white  focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 text-sm mt-2"
                 placeholder="Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
@@ -51,7 +51,14 @@ const InstagramLogin: React.FC = () => {
           <div>
             <button
               type="submit"
-              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-500 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+              className={`group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white 
+                    ${
+                      loginInput.length === 0 && password.length === 0
+                        ? "bg-blue-400 opacity-70 cursor-not-allowed"
+                        : "bg-blue-500 hover:bg-blue-600"
+                    } 
+                       focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500`}
+              disabled={loginInput.length === 0 && password.length === 0} // ✅ Properly disables the button
             >
               <a href="#">Log In</a>
             </button>
@@ -109,7 +116,7 @@ const InstagramLogin: React.FC = () => {
         </div>
       </div>
 
-      <div className="max-w-lg mt-2 w-full  bg-black p-2 rounded-lg shadow-md flex flex-wrap justify-center items-center text-gray-500 text-sm">
+      <div className="max-w-lg mt-2 w-full  bg-black p-2 rounded-lg shadow-md flex flex-wrap justify-center items-center text-[#939393] text-sm">
         <ul className="flex flex-wrap justify-center gap-3">
           <li>Meta</li>
           <li>About</li>
