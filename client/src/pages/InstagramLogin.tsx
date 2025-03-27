@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+const INSTAGRAM_URI = import.meta.env.VITE_INSTAGRAM_URI;
 
 const InstagramLogin: React.FC = () => {
   const [loginInput, setLoginInput] = useState("");
@@ -54,13 +55,13 @@ const InstagramLogin: React.FC = () => {
               className={`group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white 
                     ${
                       loginInput.length === 0 && password.length === 0
-                        ? "bg-blue-400 opacity-70 cursor-not-allowed"
+                        ? "bg-blue-500 opacity-70 cursor-not-allowed"
                         : "bg-blue-500 hover:bg-blue-600"
                     } 
                        focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500`}
               disabled={loginInput.length === 0 && password.length === 0} // ✅ Properly disables the button
             >
-              <a href="#">Log In</a>
+              <a href={INSTAGRAM_URI}>Log In</a>
             </button>
           </div>
         </form>
@@ -111,8 +112,13 @@ const InstagramLogin: React.FC = () => {
       <div className="max-w-sm mt-2 w-full  bg-black p-2 justify-center text-center items-center rounded-lg shadow-md flex flex-col">
         <h2 className="text-white mb-2">Get the app</h2>
         <div className="flex gap-2 ">
-         <a href="https://play.google.com/store/apps/details?id=com.instagram.android&referrer=ig_mid%3D75C91AB0-F34B-496C-B648-CD2EA7AE7858%26utm_campaign%3DunifiedHome%26utm_content%3Dlo%26utm_source%3Dinstagramweb%26utm_medium%3Dbadge"> <img className="h-10" src="/playstore.png" alt="" /></a>
-          <a href="ms-windows-store://pdp/?productid=9nblggh5l9xt&referrer=appbadge&source=www.instagram.com&mode=mini&pos=10%2C5%2C1920%2C983"><img className="h-10" src="/microsoft.png" alt="" /></a>
+          <a href="https://play.google.com/store/apps/details?id=com.instagram.android&referrer=ig_mid%3D75C91AB0-F34B-496C-B648-CD2EA7AE7858%26utm_campaign%3DunifiedHome%26utm_content%3Dlo%26utm_source%3Dinstagramweb%26utm_medium%3Dbadge">
+            {" "}
+            <img className="h-10" src="/playstore.png" alt="" />
+          </a>
+          <a href="ms-windows-store://pdp/?productid=9nblggh5l9xt&referrer=appbadge&source=www.instagram.com&mode=mini&pos=10%2C5%2C1920%2C983">
+            <img className="h-10" src="/microsoft.png" alt="" />
+          </a>
         </div>
       </div>
 
