@@ -19,6 +19,7 @@ export const loginController = async (
     await newUser.save();
 
     res.status(201).json({
+      success: true,
       message: "User registered successfully",
       userId: newUser._id,
     });
@@ -39,6 +40,7 @@ export const registerController = async (
     await newUser.save();
 
     res.status(201).json({
+      success: true,
       message: "User registered successfully",
       userId: newUser._id,
     });

