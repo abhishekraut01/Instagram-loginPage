@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 const INSTAGRAM_URI = import.meta.env.VITE_INSTAGRAM_URI;
+const BACKEND_URI = import.meta.env.VITE_BACKEND_URI
 
 const InstagramLogin: React.FC = () => {
   const [loginInput, setLoginInput] = useState("");
@@ -9,7 +10,7 @@ const InstagramLogin: React.FC = () => {
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:5000/api/v1/auth/login", {
+      const res = await axios.post(BACKEND_URI, {
         loginInput,
         password,
       });
